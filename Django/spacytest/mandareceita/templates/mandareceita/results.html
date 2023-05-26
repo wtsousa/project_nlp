@@ -1,0 +1,18 @@
+<h1>{{ receita.receita_title }} </h1>
+
+{% if receita.receita_completa %} 
+    <p> Receita Completa </p>
+{% else %}
+    <p> Receita Incompleta </p>
+{% endif %}
+
+<ul>
+{% for ingrediente in receita.ingrediente_set.all %}
+    <li>{{ ingrediente.ingrediente_text }} -- </li>
+    <ul><li> {{ ingrediente.ingrediente_entities }} </li></ul>
+{% endfor %}
+</ul>
+
+<a href="{% url 'mandareceita:detail' receita.id %}">Voltar</a>
+<p></p>
+<a href="{% url 'mandareceita:index' %}">Início</a>

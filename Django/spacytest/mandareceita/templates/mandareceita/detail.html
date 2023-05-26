@@ -1,0 +1,31 @@
+<h1>{{ receita.receita_title }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'mandareceita:edit_ingredient' receita.id %}" method="post">
+{% csrf_token %}
+{% for ingrediente in receita.ingrediente_set.all %}
+    <input type="radio" name="ingrediente" id="ingrediente{{ forloop.counter }}" value="{{ ingrediente.id }}">
+    <label for="ingrediente{{ forloop.counter }}">{{ ingrediente.ingrediente_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Edite Ingrediente">
+</form>
+
+<hr>
+
+<form action="{% url 'mandareceita:vote' receita.id %}" method="post">
+{% csrf_token %}
+{% for ingrediente in receita.ingrediente_set.all %}
+    <input type="radio" name="ingrediente" id="ingrediente{{ forloop.counter }}" value="{{ ingrediente.id }}" checked=True>
+    <label for="ingrediente{{ forloop.counter }}">{{ ingrediente.ingrediente_entities }}</label><br>
+{% endfor %}
+
+{% if receita.receita_completa %}<p><strong>Receita Completa</strong></p> {% endif %}
+{% if not receita.receita_completa %}<p><strong>Receita INCOMPLETA</strong></p> {% endif %}
+
+<input type="submit" value="Completar Receita">
+</form>
+
+<hr>
+
+<a href="{% url 'mandareceita:index' %}">Início</a>

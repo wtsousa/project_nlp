@@ -1,0 +1,41 @@
+<!-- <h3>{{ ingrediente.ingrediente_text }}</h3> -->
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+    
+<form action="{% url 'mandareceita:add_entity' ingrediente.id %}" method="post">
+
+    <input type="hidden" name="ingrediente" id="ingrediente" value="{{ ingrediente.id }}">
+
+{% csrf_token %}
+    <h3> QTD - Quantidade</h3>
+{% for qtd_word in ingrediente.ingrediente_text.split %}
+    <input type="checkbox" name="qtd_checked_words []" id="qtd_ingrediente{{ forloop.counter }}" value="{{ qtd_word }}">
+    <label for="qtd_ingrediente{{ forloop.counter }}">{{ qtd_word }}</label><br>
+{% endfor %}
+    <hr>
+
+    <h3> MED - Medida</h3>
+{% for med_word in ingrediente.ingrediente_text.split %}
+    <input type="checkbox" name="med_checked_words []" id="med_ingrediente{{ forloop.counter }}" value="{{ med_word }}">
+    <label for="med_ingrediente{{ forloop.counter }}">{{ med_word }}</label><br>
+{% endfor %}
+    <hr>
+    
+    <h3> PRD - Produto</h3>
+{% for prd_word in ingrediente.ingrediente_text.split %}
+    <input type="checkbox" name="prd_checked_words []" id="prd_ingrediente{{ forloop.counter }}" value="{{ prd_word }}">
+    <label for="prd_ingrediente{{ forloop.counter }}">{{ prd_word }}</label><br>
+{% endfor %}
+    <hr>
+    
+    <h3> CMP - Complemento </h3>
+{% for cmp_word in ingrediente.ingrediente_text.split %}
+    <input type="checkbox" name="cmp_checked_words []" id="cmp_ingrediente{{ forloop.counter }}" value="{{ cmp_word }}">
+    <label for="cmp_ingrediente{{ forloop.counter }}">{{ cmp_word }}</label><br>
+{% endfor %}
+    <hr>
+        
+<input type="submit" value="Adicione Entidades">
+</form>

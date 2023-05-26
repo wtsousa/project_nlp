@@ -1,0 +1,31 @@
+<a href="{% url 'mandareceita:add_receita' %}">Adicione Receita</a>
+<a href="{% url 'mandareceita:save_training_data' %}">Salve TRAINING DATA</a>
+<a href="{% url 'mandareceita:save_training_data' %}">Lista PRODUTOS</a>
+<a href="{% url 'mandareceita:save_training_data' %}">Lista MEDIDAS</a>
+
+{% if receita_list %}
+    <p>Receitas Incompletas:</p>
+    
+    <ul>
+    {% for receita in receita_list %}
+        {%if not receita.receita_completa %}
+            <li><a href="{% url 'mandareceita:detail' receita.id %}">{{ receita.receita_title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    
+    <hr>
+    Todas as receitas:
+    <ul>
+    {% for receita in receita_list %}
+        <li><a href="{% url 'mandareceita:detail' receita.id %}">{{ receita.receita_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>MANDA RECEITA!</p>
+{% endif %}
+
+<hr>
+
+
+

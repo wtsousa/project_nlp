@@ -1,0 +1,19 @@
+<form action="{% url 'mandareceita:add_ingrediente'  %}" method="post">
+{% csrf_token %}
+<label for="receita_title">Título da Receita:</label>
+<input type="text" id="receita_title" name="receita_title" size="100">
+
+<p> </p>
+
+<label for ="receita_text"></label>
+Insira os ingredientes
+<textarea cols=120 id="receita_text" rows="30" name="receita_text"></textarea>
+
+<p> </p>
+
+<input type="submit" value="Adicione Ingredientes">
+</form>
+
+<p> </p>
+
+<a href="{% url 'mandareceita:index'  %}">Voltar</a>
